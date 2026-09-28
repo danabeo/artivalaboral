@@ -69,9 +69,14 @@ const copy = {
 const navFiles = ["regimen-artistas.html", "servicios.html", "nosotros.html", "recursos.html", "contacto.html"];
 
 function prefix(lang) { return lang === "es" ? "" : "../"; }
-function publicPath(lang, file) { return lang === "es" ? `/${file === "index.html" ? "" : file}` : `/${lang}/${file === "index.html" ? "" : file}`; }
+function routePath(file) {
+  const [path, fragment] = file.split("#");
+  const route = path === "index.html" ? "" : path.replace(/\.html$/, "");
+  return fragment ? `${route}#${fragment}` : route;
+}
+function publicPath(lang, file) { return lang === "es" ? `/${routePath(file)}` : `/${lang}/${routePath(file)}`; }
 function diskPath(lang, file) { return lang === "es" ? join(root, file) : join(root, lang, file); }
-function href(_lang, file) { return file; }
+function href(_lang, file) { return file === "index.html" ? "./" : routePath(file); }
 
 function logo() {
   return `<span class="logo-variant foco foco-a" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M7 37 22 7l15 30"/><path class="accent" d="M14.5 26h15"/></svg><span class="logo-type"><b>ARTIVA</b><small>LABORAL</small></span></span>`;

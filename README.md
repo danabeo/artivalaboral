@@ -1,6 +1,6 @@
 # Artiva Laboral
 
-Sitio web estático y multilingüe de [artivalaboral.com](https://artivalaboral.com), preparado para desplegarse en Cloudflare Pages.
+Sitio web estático y multilingüe de [artivalaboral.com](https://artivalaboral.com), preparado para desplegarse con Cloudflare Workers Static Assets.
 
 ## Desarrollo
 
@@ -12,7 +12,7 @@ npm run build
 
 El generador escribe la versión publicable en `dist/`.
 
-## Cloudflare Pages
+## Cloudflare
 
 Configurar el proyecto con estos valores:
 
@@ -21,7 +21,7 @@ Configurar el proyecto con estos valores:
 - Directorio de salida: `dist`
 - Directorio raíz: `/`
 
-Los cambios enviados a `main` generan automáticamente un nuevo despliegue.
+El proyecto está conectado a GitHub mediante Cloudflare Workers Builds. Los cambios enviados a `main` generan automáticamente un nuevo despliegue de los recursos estáticos de `dist/`.
 
 ## Dominio
 
@@ -30,4 +30,3 @@ El dominio canónico es `artivalaboral.com`. Conviene añadir también `www.arti
 ## Formulario
 
 El formulario utiliza el endpoint AJAX de FormSubmit y entrega las consultas a `info@artivalaboral.com`. La confirmación se muestra dentro del propio sitio.
-
