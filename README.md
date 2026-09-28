@@ -23,6 +23,8 @@ Configurar el proyecto con estos valores:
 
 El proyecto está conectado a GitHub mediante Cloudflare Workers Builds. Los cambios enviados a `main` generan automáticamente un nuevo despliegue de los recursos estáticos de `dist/`.
 
+Despliegue temporal: [artivalaboral.danabeo.workers.dev](https://artivalaboral.danabeo.workers.dev).
+
 ## Dominio
 
 El dominio canónico es `artivalaboral.com`. Conviene añadir también `www.artivalaboral.com` y redirigirlo al dominio raíz desde Cloudflare.
