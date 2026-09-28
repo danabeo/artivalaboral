@@ -23,7 +23,7 @@ Configurar el proyecto con estos valores:
 
 El proyecto está conectado a GitHub mediante Cloudflare Workers Builds. Los cambios enviados a `main` generan automáticamente un nuevo despliegue de los recursos estáticos de `dist/`.
 
-Despliegue temporal: [artivalaboral.danabeo.workers.dev](https://artivalaboral.danabeo.workers.dev).
+Despliegue temporal: [artivalaboral.danabeo.workers.dev](https://artivalaboral.danabeo.workers.dev). La rama de producción es `main` y está conectada a Cloudflare Workers Builds.
 
 ## Dominio
 
