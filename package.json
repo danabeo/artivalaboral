@@ -1,0 +1,13 @@
+{
+  "name": "artivalaboral",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web multilingüe de Artiva Laboral",
+  "scripts": {
+    "build": "node scripts/generate-site.mjs",
+    "check": "node --check scripts/generate-site.mjs && node --check dist/site.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
