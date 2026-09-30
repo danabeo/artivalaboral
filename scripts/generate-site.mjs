@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = new URL("../dist/", import.meta.url).pathname;
@@ -403,3 +403,42 @@ writeFileSync(join(root, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${d
 writeFileSync(join(root, "404.html"), `<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>Página no encontrada — Artiva Laboral</title><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/web.css"><body class="web-home"><main class="thank-you"><p class="eyebrow">404 · ARTIVA LABORAL</p><h1>Página no encontrada.</h1><p>The page you requested could not be found. · La pàgina que busques no existeix.</p><a class="button button-arrow" href="/">Volver al inicio</a></main></body></html>`);
 
 console.log(`Generated ${langs.length * pages.length} pages for artivalaboral.com`);
+
+
+const seoH1Overrides = {
+  es: {
+    "index.html": ["La asesoría laboral", "que hace posible la cultura."],
+    "regimen-artistas.html": ["Gestión laboral", "del régimen de artistas."],
+    "servicios.html": ["Servicios de asesoría laboral", "para empresas culturales."],
+    "recursos.html": ["Recursos laborales", "para el sector cultural."],
+  },
+  ca: {
+    "index.html": ["L’assessorament laboral", "que fa possible la cultura."],
+    "regimen-artistas.html": ["Gestió laboral", "del règim d’artistes."],
+    "servicios.html": ["Serveis d’assessorament laboral", "per a empreses culturals."],
+    "recursos.html": ["Recursos laborals", "per al sector cultural."],
+  },
+  en: {
+    "index.html": ["Employment advice", "that makes culture possible."],
+    "regimen-artistas.html": ["Employment support", "for performing artists."],
+    "servicios.html": ["Employment services", "for cultural organisations."],
+    "recursos.html": ["Employment resources", "for the cultural sector."],
+  },
+};
+
+let updatedSeoH1s = 0;
+for (const [lang, files] of Object.entries(seoH1Overrides)) {
+  for (const [file, [primary, secondary]] of Object.entries(files)) {
+    const outputPath = diskPath(lang, file);
+    const html = readFileSync(outputPath, "utf8");
+    const h1StartMarker = "<h1";
+    const h1Start = html.indexOf(h1StartMarker);
+    const h1OpenEnd = html.indexOf(">", h1Start);
+    const h1Close = html.indexOf("</h1>", h1OpenEnd);
+    if (h1Start < 0 || h1OpenEnd < 0 || h1Close < h1OpenEnd) throw new Error("Missing H1 in " + lang + "/" + file);
+    const updatedHtml = html.slice(0, h1OpenEnd + 1) + "<span>" + primary + "</span> <em>" + secondary + "</em>" + html.slice(h1Close);
+    writeFileSync(outputPath, updatedHtml);
+    updatedSeoH1s += 1;
+  }
+}
+if (updatedSeoH1s !== 12) throw new Error("Expected to update 12 SEO H1s, updated " + updatedSeoH1s);
