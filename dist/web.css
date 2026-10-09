@@ -287,6 +287,8 @@
 .resource-card-live:hover p, .resource-card-live:hover > small { color: #bfc1c0; }
 .resource-card-pending { background: rgba(21,23,28,.035); }
 .resource-card-pending > small { color: #da3f31; font-weight: 700; }
+.resource-card-grid > .resource-card:nth-child(4) { grid-column: 1 / -1; min-height: 300px; background: #e9e4d9; }
+.resource-card-grid > .resource-card:nth-child(4) h3 { max-width: 750px; }
 .resource-method { display: grid; grid-template-columns: .42fr 1.05fr .53fr; gap: 3rem; align-items: start; padding: 8rem max(1.25rem, calc((100vw - 1180px)/2)); }
 .resource-method .section-kicker { color: #70e5e5; }
 .resource-method h2 { margin: 0; font-family: var(--font-serif); font-size: clamp(3.1rem, 5.5vw, 5.8rem); font-weight: 400; line-height: .9; letter-spacing: -.055em; }
@@ -321,6 +323,21 @@
 .article-sources strong { color: #70e5e5; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; }
 .article-sources a { color: #f0eee7; line-height: 1.5; }
 .article-sources p { margin: 1rem 0 0; color: #8f9291; font-size: .82rem; line-height: 1.6; }
+.guide-contents { margin: 0 0 5rem; padding: 1.5rem 0 2rem; border-top: 1px solid rgba(255,255,255,.28); border-bottom: 1px solid rgba(255,255,255,.28); }
+.guide-contents strong { color: #70e5e5; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; }
+.guide-contents ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem 1.5rem; margin: 1.3rem 0 0; padding-left: 1.3rem; color: #ff604f; }
+.guide-contents a { color: #e8e7e1; line-height: 1.5; text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.guide-contents a:hover, .guide-contents a:focus-visible { color: #70e5e5; }
+.guide-section, .guide-faq { scroll-margin-top: 7rem; }
+.guide-section { padding: 3rem 0; border-top: 1px solid rgba(255,255,255,.22); }
+.guide-section > span { color: #ff604f; font-size: .82rem; font-weight: 800; letter-spacing: .1em; }
+.guide-section h2, .guide-faq > h2 { margin: .9rem 0 2rem; font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 3.7rem); font-weight: 400; line-height: 1; letter-spacing: -.045em; }
+.guide-section p, .guide-faq p { margin: 0 0 1.25rem; color: #c5c7c5; font-size: 1rem; line-height: 1.8; }
+.guide-section p:last-child, .guide-faq p:last-child { margin-bottom: 0; }
+.guide-checklist { margin-top: 3rem; }
+.guide-faq { padding-top: 2rem; }
+.guide-faq > div { padding: 1.6rem 0; border-top: 1px solid rgba(255,255,255,.22); }
+.guide-faq h3 { margin: 0 0 .8rem; font-family: var(--font-serif); font-size: 1.6rem; font-weight: 500; line-height: 1.2; }
 
 @media (max-width: 1200px) {
   .web-header { gap: 1rem; }
@@ -348,6 +365,7 @@
 }
 
 @media (max-width: 700px) {
+  .guide-contents ol { grid-template-columns: 1fr; }
   .architecture-head { align-items: flex-start; flex-direction: column; gap: .6rem; }
   .architecture-main { padding: 4rem 0; }
   .architecture-intro, .site-map { grid-template-columns: 1fr; }

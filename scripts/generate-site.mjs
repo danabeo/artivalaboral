@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { probationGuide } from "./probation-guide.mjs";
 
 const root = fileURLToPath(new URL("../dist/", import.meta.url));
 const domain = "https://artivalaboral.com";
@@ -15,6 +16,7 @@ const pages = [
   "recurso-contrato-artistas.html",
   "recurso-precontrato-trabajo.html",
   "recurso-altas-bajas-calendario.html",
+  "recurso-periodo-prueba-2026.html",
   "contacto.html",
   "privacidad.html",
   "cookies.html",
@@ -289,10 +291,16 @@ const resourcesContent = {
 
 function resources(lang) {
   const t = resourcesContent[lang];
+  const newCard = {
+    es: ["NUEVA NORMATIVA", "Período de prueba: qué cambia desde octubre de 2026", "Guía completa sobre información previa, límites y contratos artísticos.", probationGuide.file],
+    ca: ["NOVA NORMATIVA", "Període de prova: què canvia des d’octubre de 2026", "Guia completa sobre informació prèvia, límits i contractes artístics.", probationGuide.file],
+    en: ["NEW REGULATIONS", "Probation periods: what changes from October 2026", "A complete guide to advance information, limits and artistic contracts.", probationGuide.file],
+  };
+  const cards = [...t.cards, newCard[lang]];
   return layout(lang, "recursos.html", t.title, t.desc, "recursos.html", `
     <section class="resources-hero"><div><p class="eyebrow">${t.eyebrow}</p><h1>${t.h1}</h1></div><p>${t.lead}</p></section>
     <section class="featured-resource"><div class="featured-resource-label"><span>01</span><small>${lang === "en" ? "Featured guide" : lang === "ca" ? "Guia destacada" : "Guía destacada"}</small></div><div><p class="section-kicker">${lang === "en" ? "Regulatory update" : lang === "ca" ? "Actualitat normativa" : "Actualidad normativa"}</p><h2>${t.featured}</h2><p>${t.featuredP}</p><a class="button button-arrow" href="${href(lang, "recurso-nuevo-reglamento-artistas.html")}">${t.read}</a></div><time datetime="2026-09-09">09.09.2026</time></section>
-    <section class="resource-library"><div class="inner-section-head"><p class="section-kicker">02 · ${lang === "en" ? "Library" : "Biblioteca"}</p><h2>${lang === "en" ? "Guides built around real decisions." : lang === "ca" ? "Guies construïdes al voltant de decisions reals." : "Guías construidas alrededor de decisiones reales."}</h2><p>${lang === "en" ? "Direct, dated and focused on what administration and production teams need to check." : lang === "ca" ? "Directes, datades i centrades en allò que han de comprovar els equips d’administració i producció." : "Directas, fechadas y centradas en lo que necesitan comprobar administración y producción."}</p></div><div class="resource-card-grid">${t.cards.map((x, i) => `<article class="resource-card${x[3] ? "" : " resource-card-pending"}"><span>0${i + 2}</span><small>${x[0]}</small><h3>${x[2] ? x[1] : ""}</h3><p>${x[2]}</p>${x[3] ? `<a href="${href(lang, x[3])}">${t.read} ↗</a>` : `<b>${x[0]}</b>`}</article>`).join("")}</div></section>
+    <section class="resource-library"><div class="inner-section-head"><p class="section-kicker">02 · ${lang === "en" ? "Library" : "Biblioteca"}</p><h2>${lang === "en" ? "Guides built around real decisions." : lang === "ca" ? "Guies construïdes al voltant de decisions reals." : "Guías construidas alrededor de decisiones reales."}</h2><p>${lang === "en" ? "Direct, dated and focused on what administration and production teams need to check." : lang === "ca" ? "Directes, datades i centrades en allò que han de comprovar els equips d’administració i producció." : "Directas, fechadas y centradas en lo que necesitan comprobar administración y producción."}</p></div><div class="resource-card-grid">${cards.map((x, i) => `<article class="resource-card${x[3] ? "" : " resource-card-pending"}"><span>0${i + 2}</span><small>${x[0]}</small><h3>${x[2] ? x[1] : ""}</h3><p>${x[2]}</p>${x[3] ? `<a href="${href(lang, x[3])}">${t.read} ↗</a>` : `<b>${x[0]}</b>`}</article>`).join("")}</div></section>
     <section class="resource-method"><p class="section-kicker">03 · ${lang === "en" ? "Editorial approach" : lang === "ca" ? "Criteri editorial" : "Criterio editorial"}</p><h2>${t.methodTitle}</h2><div>${t.methodP.map(p => `<p>${p}</p>`).join("")}</div></section>
   `);
 }
@@ -394,6 +402,29 @@ function article(lang, article) {
   `, "inner-page article-page");
 }
 
+function probationArticle(lang) {
+  const t = probationGuide[lang];
+  const resourceLink = lang === "en" ? "All resources" : lang === "ca" ? "Tots els recursos" : "Todos los recursos";
+  const contentsLabel = lang === "en" ? "In this guide" : lang === "ca" ? "En aquesta guia" : "En esta guía";
+  const applicationLabel = lang === "en" ? "Apply it to your case" : lang === "ca" ? "Aplicar-ho al teu cas" : "Aplicarlo a tu caso";
+  return layout(lang, probationGuide.file, t.title, t.desc, "recursos.html", `
+    <article class="probation-article"><header class="article-hero article-hero-coral"><div class="article-meta"><span>${t.tag}</span><span>${t.date}</span><span>${t.read}</span></div><h1>${t.h1}</h1><p>${t.lead}</p></header>
+      <div class="article-layout"><aside class="article-aside"><p>${lang === "en" ? "KEY POINT" : lang === "ca" ? "IDEA CLAU" : "IDEA CLAVE"}</p><strong>${t.key}</strong><a href="${href(lang, "recursos.html")}">${resourceLink} ↗</a></aside>
+        <div class="article-body">
+          <p class="article-lead">${t.lead}</p>
+          <div class="article-highlight guide-summary"><p class="section-kicker">ARTIVA LABORAL</p><h2>${t.quickTitle}</h2><ul>${t.quick.map(item => `<li>${item}</li>`).join("")}</ul></div>
+          <nav class="guide-contents" aria-label="${contentsLabel}"><strong>${contentsLabel}</strong><ol>${t.sections.map((section, i) => `<li><a href="#guide-${i + 1}">${section.title}</a></li>`).join("")}<li><a href="#guide-faq">${t.faqTitle}</a></li></ol></nav>
+          ${t.sections.map((section, i) => `<section class="guide-section" id="guide-${i + 1}"><span>${String(i + 1).padStart(2, "0")}</span><h2>${section.title}</h2>${section.paragraphs.map(p => `<p>${p}</p>`).join("")}</section>`).join("")}
+          <div class="article-highlight guide-checklist"><p class="section-kicker">ARTIVA LABORAL</p><h2>${t.checklistTitle}</h2><ul>${t.checklist.map(item => `<li>${item}</li>`).join("")}</ul></div>
+          <section class="guide-faq" id="guide-faq"><h2>${t.faqTitle}</h2>${t.faq.map(([question, answer]) => `<div><h3>${question}</h3><p>${answer}</p></div>`).join("")}</section>
+          <div class="article-sources"><strong>${t.sourceLabel}</strong>${probationGuide.sources.map(source => `<a href="${source.url}" target="_blank" rel="noopener">BOE · ${source[lang]} ↗</a>`).join("")}<p>${t.note}</p></div>
+        </div>
+      </div>
+    </article>
+    <section class="inner-contact"><div><p class="section-kicker">${applicationLabel}</p><h2>${t.cta}</h2></div><div><p>${t.ctaP}</p><a class="button button-arrow" href="${href(lang, "contacto.html")}">${copy[lang].cta}</a></div></section>
+  `, "inner-page article-page");
+}
+
 const contactContent = {
   es: { title: "Contacto — Artiva Laboral", desc: "Contacta con Artiva Laboral para explicar las necesidades laborales de tu empresa o producción.", eyebrow: "Empecemos por tu caso", h1: "Hablemos de tu empresa. <em>Sin rodeos.</em>", lead: "Explícanos qué necesitas y nos pondremos en contacto para entender el contexto y plantear la forma de trabajo adecuada.", formK: "01 · Tu consulta", formTitle: "¿Qué está pasando?", name: "Nombre y apellidos", company: "Empresa", email: "Correo electrónico", phone: "Teléfono", service: "¿En qué podemos ayudarte?", options: ["Régimen de artistas", "Gestión laboral integral", "Nóminas y contratación", "Seguridad Social", "Asesoramiento laboral", "Consulta general"], message: "Cuéntanos brevemente tu caso", privacy: "He leído la política de privacidad y acepto el tratamiento de mis datos para responder a esta consulta.", send: "Enviar consulta", sending: "Enviando…", successTitle: "Consulta enviada.", successText: "Gracias por escribirnos. Hemos recibido tu mensaje y nos pondremos en contacto contigo lo antes posible.", sendAgain: "Enviar otra consulta", error: "No hemos podido enviar la consulta. Inténtalo de nuevo o escríbenos directamente:", direct: "02 · Contacto directo", directTitle: "También puedes escribirnos o llamar.", location: "Ámbito", area: "Barcelona · Servicio a empresas", next: "03 · Qué ocurre después", nextTitle: "Una primera conversación clara.", nextP: "Primero necesitamos comprender cómo funciona tu empresa.", steps: [["Escuchamos", "Actividad, estructura, plantilla, frecuencia de movimientos y necesidad concreta."], ["Valoramos", "Revisamos el alcance y qué información necesitamos para darte una respuesta útil."], ["Proponemos", "Definimos la forma de trabajo y un servicio ajustado a la realidad de tu empresa."]], subject: "Nueva consulta desde Artiva Laboral" },
   ca: { title: "Contacte — Artiva Laboral", desc: "Contacta amb Artiva Laboral per explicar les necessitats laborals de la teva empresa o producció.", eyebrow: "Comencem pel teu cas", h1: "Parlem de la teva empresa. <em>Sense embuts.</em>", lead: "Explica’ns què necessites i ens posarem en contacte per entendre el context i plantejar la manera de treballar adequada.", formK: "01 · La teva consulta", formTitle: "Què està passant?", name: "Nom i cognoms", company: "Empresa", email: "Correu electrònic", phone: "Telèfon", service: "En què et podem ajudar?", options: ["Règim d’artistes", "Gestió laboral integral", "Nòmines i contractació", "Seguretat Social", "Assessorament laboral", "Consulta general"], message: "Explica’ns breument el teu cas", privacy: "He llegit la política de privacitat i accepto el tractament de les meves dades per respondre aquesta consulta.", send: "Enviar consulta", sending: "Enviant…", successTitle: "Consulta enviada.", successText: "Gràcies per escriure’ns. Hem rebut el teu missatge i ens posarem en contacte amb tu tan aviat com sigui possible.", sendAgain: "Enviar una altra consulta", error: "No hem pogut enviar la consulta. Torna-ho a provar o escriu-nos directament:", direct: "02 · Contacte directe", directTitle: "També ens pots escriure o trucar.", location: "Àmbit", area: "Barcelona · Servei a empreses", next: "03 · Què passa després", nextTitle: "Una primera conversa clara.", nextP: "Primer necessitem entendre com funciona la teva empresa.", steps: [["Escoltem", "Activitat, estructura, plantilla, freqüència de moviments i necessitat concreta."], ["Valorem", "Revisem l’abast i quina informació necessitem per donar-te una resposta útil."], ["Proposem", "Definim la manera de treballar i un servei ajustat a la realitat de la teva empresa."]], subject: "Nova consulta des d’Artiva Laboral" },
@@ -459,6 +490,7 @@ for (const lang of langs) {
     "recurso-contrato-artistas.html": article(lang, articles.contract),
     "recurso-precontrato-trabajo.html": article(lang, articles.precontract),
     "recurso-altas-bajas-calendario.html": article(lang, articles.schedule),
+    "recurso-periodo-prueba-2026.html": probationArticle(lang),
     "contacto.html": contact(lang),
     "privacidad.html": legalPage(lang, "privacy", "privacidad.html"),
     "cookies.html": legalPage(lang, "cookies", "cookies.html"),
