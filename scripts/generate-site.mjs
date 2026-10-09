@@ -1,7 +1,8 @@
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("../dist/", import.meta.url).pathname;
+const root = fileURLToPath(new URL("../dist/", import.meta.url));
 const domain = "https://artivalaboral.com";
 const langs = ["es", "ca", "en"];
 const pages = [
@@ -13,6 +14,7 @@ const pages = [
   "recurso-nuevo-reglamento-artistas.html",
   "recurso-contrato-artistas.html",
   "recurso-precontrato-trabajo.html",
+  "recurso-altas-bajas-calendario.html",
   "contacto.html",
   "privacidad.html",
   "cookies.html",
@@ -280,9 +282,9 @@ function about(lang) {
 }
 
 const resourcesContent = {
-  es: { title: "Recursos laborales para el sector cultural — Artiva Laboral", desc: "Guías claras y actualizadas sobre contratación, régimen de artistas y gestión laboral.", eyebrow: "Conocimiento aplicado", h1: "Recursos para decidir <em>mejor.</em>", lead: "Normativa, criterios y procesos explicados desde la práctica laboral de empresas y producciones.", featured: "Nuevo reglamento laboral de artistas: qué cambia en 2027", featuredP: "El Real Decreto 607/2026 sustituirá el marco vigente el 25 de mayo de 2027. Resumimos los cambios y qué conviene preparar antes.", read: "Leer guía", cards: [["RÉGIMEN DE ARTISTAS", "Contrato laboral artístico: cinco puntos clave", "Qué debe quedar claro antes de formalizar una contratación artística.", "recurso-contrato-artistas.html"], ["CONTRATACIÓN", "Precontrato de trabajo: qué compromete y qué conviene definir", "Cómo documentar una incorporación futura sin crear ambigüedades.", "recurso-precontrato-trabajo.html"], ["PRÓXIMAMENTE", "Altas, bajas y cambios de calendario en una producción", "Guía práctica en preparación.", ""]], methodTitle: "Contenido útil, con contexto y fecha.", methodP: ["Cada guía distingue entre información general y decisiones que requieren revisar un caso concreto.", "Indicamos la fecha de actualización y enlazamos las fuentes oficiales cuando corresponde."] },
-  ca: { title: "Recursos laborals per al sector cultural — Artiva Laboral", desc: "Guies clares i actualitzades sobre contractació, règim d’artistes i gestió laboral.", eyebrow: "Coneixement aplicat", h1: "Recursos per decidir <em>millor.</em>", lead: "Normativa, criteris i processos explicats des de la pràctica laboral d’empreses i produccions.", featured: "Nou reglament laboral d’artistes: què canvia el 2027", featuredP: "El Reial decret 607/2026 substituirà el marc vigent el 25 de maig de 2027. Resumim els canvis i què convé preparar abans.", read: "Llegir la guia", cards: [["RÈGIM D’ARTISTES", "Contracte laboral artístic: cinc punts clau", "Què ha de quedar clar abans de formalitzar una contractació artística.", "recurso-contrato-artistas.html"], ["CONTRACTACIÓ", "Precontracte de treball: què compromet i què convé definir", "Com documentar una incorporació futura sense crear ambigüitats.", "recurso-precontrato-trabajo.html"], ["PRÒXIMAMENT", "Altes, baixes i canvis de calendari en una producció", "Guia pràctica en preparació.", ""]], methodTitle: "Contingut útil, amb context i data.", methodP: ["Cada guia distingeix entre informació general i decisions que requereixen revisar un cas concret.", "Indiquem la data d’actualització i enllacem les fonts oficials quan correspon."] },
-  en: { title: "Employment resources for the cultural sector — Artiva Laboral", desc: "Clear, current guides on employment contracts, Spain’s artists’ regime and workforce management.", eyebrow: "Applied knowledge", h1: "Resources for better <em>decisions.</em>", lead: "Rules, criteria and processes explained through the day-to-day employment practice of organisations and productions.", featured: "New artists’ employment regulations: what changes in 2027", featuredP: "Royal Decree 607/2026 will replace the current framework on 25 May 2027. We summarise the changes and what to prepare beforehand.", read: "Read the guide", cards: [["ARTISTS’ REGIME", "Artistic employment contracts: five key points", "What must be clear before an artistic engagement is formalised.", "recurso-contrato-artistas.html"], ["CONTRACTS", "Employment pre-contracts: what they commit you to", "How to document a future hire without creating ambiguity.", "recurso-precontrato-trabajo.html"], ["COMING SOON", "Registrations, deregistrations and schedule changes in a production", "Practical guide in preparation.", ""]], methodTitle: "Useful content, with context and a date.", methodP: ["Each guide separates general information from decisions that require reviewing a specific case.", "We state the update date and link to official sources where relevant."] },
+  es: { title: "Recursos laborales para el sector cultural — Artiva Laboral", desc: "Guías claras y actualizadas sobre contratación, régimen de artistas y gestión laboral.", eyebrow: "Conocimiento aplicado", h1: "Recursos para decidir <em>mejor.</em>", lead: "Normativa, criterios y procesos explicados desde la práctica laboral de empresas y producciones.", featured: "Nuevo reglamento laboral de artistas: qué cambia en 2027", featuredP: "El Real Decreto 607/2026 sustituirá el marco vigente el 25 de mayo de 2027. Resumimos los cambios y qué conviene preparar antes.", read: "Leer guía", cards: [["RÉGIMEN DE ARTISTAS", "Contrato laboral artístico: cinco puntos clave", "Qué debe quedar claro antes de formalizar una contratación artística.", "recurso-contrato-artistas.html"], ["CONTRATACIÓN", "Precontrato de trabajo: qué compromete y qué conviene definir", "Cómo documentar una incorporación futura sin crear ambigüedades.", "recurso-precontrato-trabajo.html"], ["GESTIÓN DE PRODUCCIÓN", "Altas, bajas y cambios de calendario en una producción", "Cómo coordinar jornadas y comunicaciones cuando cambia una producción.", "recurso-altas-bajas-calendario.html"]], methodTitle: "Contenido útil, con contexto y fecha.", methodP: ["Cada guía distingue entre información general y decisiones que requieren revisar un caso concreto.", "Indicamos la fecha de actualización y enlazamos las fuentes oficiales cuando corresponde."] },
+  ca: { title: "Recursos laborals per al sector cultural — Artiva Laboral", desc: "Guies clares i actualitzades sobre contractació, règim d’artistes i gestió laboral.", eyebrow: "Coneixement aplicat", h1: "Recursos per decidir <em>millor.</em>", lead: "Normativa, criteris i processos explicats des de la pràctica laboral d’empreses i produccions.", featured: "Nou reglament laboral d’artistes: què canvia el 2027", featuredP: "El Reial decret 607/2026 substituirà el marc vigent el 25 de maig de 2027. Resumim els canvis i què convé preparar abans.", read: "Llegir la guia", cards: [["RÈGIM D’ARTISTES", "Contracte laboral artístic: cinc punts clau", "Què ha de quedar clar abans de formalitzar una contractació artística.", "recurso-contrato-artistas.html"], ["CONTRACTACIÓ", "Precontracte de treball: què compromet i què convé definir", "Com documentar una incorporació futura sense crear ambigüitats.", "recurso-precontrato-trabajo.html"], ["GESTIÓ DE PRODUCCIÓ", "Altes, baixes i canvis de calendari en una producció", "Com coordinar jornades i comunicacions quan canvia una producció.", "recurso-altas-bajas-calendario.html"]], methodTitle: "Contingut útil, amb context i data.", methodP: ["Cada guia distingeix entre informació general i decisions que requereixen revisar un cas concret.", "Indiquem la data d’actualització i enllacem les fonts oficials quan correspon."] },
+  en: { title: "Employment resources for the cultural sector — Artiva Laboral", desc: "Clear, current guides on employment contracts, Spain’s artists’ regime and workforce management.", eyebrow: "Applied knowledge", h1: "Resources for better <em>decisions.</em>", lead: "Rules, criteria and processes explained through the day-to-day employment practice of organisations and productions.", featured: "New artists’ employment regulations: what changes in 2027", featuredP: "Royal Decree 607/2026 will replace the current framework on 25 May 2027. We summarise the changes and what to prepare beforehand.", read: "Read the guide", cards: [["ARTISTS’ REGIME", "Artistic employment contracts: five key points", "What must be clear before an artistic engagement is formalised.", "recurso-contrato-artistas.html"], ["CONTRACTS", "Employment pre-contracts: what they commit you to", "How to document a future hire without creating ambiguity.", "recurso-precontrato-trabajo.html"], ["PRODUCTION MANAGEMENT", "Registrations, deregistrations and schedule changes in a production", "How to coordinate workdays and filings when a production changes.", "recurso-altas-bajas-calendario.html"]], methodTitle: "Useful content, with context and a date.", methodP: ["Each guide separates general information from decisions that require reviewing a specific case.", "We state the update date and link to official sources where relevant."] },
 };
 
 function resources(lang) {
@@ -296,6 +298,74 @@ function resources(lang) {
 }
 
 const articles = {
+  schedule: {
+    file: "recurso-altas-bajas-calendario.html",
+    accent: "",
+    source: "https://www.boe.es/buscar/act.php?id=BOE-A-1996-4447#a32",
+    es: {
+      title: "Altas, bajas y cambios de calendario en una producción — Artiva Laboral",
+      desc: "Cómo coordinar altas, bajas y cambios de fechas en una producción cultural sin perder el control de los plazos.",
+      tag: "GESTIÓN DE PRODUCCIÓN", date: "9 octubre 2026", read: "6 min de lectura",
+      h1: "Altas, bajas y cambios de calendario en una producción.",
+      lead: "Un ensayo añadido, una actuación aplazada o un cambio de equipo pueden alterar la contratación y las comunicaciones a la Seguridad Social. El calendario debe llegar a administración antes de que cambie el trabajo.",
+      key: "El alta se solicita antes de comenzar a trabajar. Según el reglamento vigente, la baja y las variaciones de datos se comunican dentro de los seis días naturales siguientes al cese o al cambio.",
+      points: [
+        ["01", "Un calendario por persona y actividad", "Reúne ensayos, montajes, funciones, rodajes, desplazamientos y desmontajes con fechas reales. Identifica quién trabaja cada día y bajo qué contrato."],
+        ["02", "Alta antes del primer trabajo", "Comprueba identidad, afiliación, código de cuenta de cotización, función y fecha de inicio. La solicitud de alta debe presentarse antes de que empiece la prestación de servicios."],
+        ["03", "Cambios comunicados en cuanto se confirman", "Si se adelanta, aplaza o añade una jornada, producción debe avisar a quien gestiona personal. Hay que revisar el contrato, la jornada y si corresponde corregir un movimiento previo o comunicar una variación de datos."],
+        ["04", "Baja con la fecha de cese correcta", "Confirma el último día de trabajo y las tareas de cierre antes de comunicar la baja. Una función cancelada no justifica por sí sola dar por terminada una relación laboral que continúa."],
+        ["05", "Justificantes y cierre", "Conserva la versión aprobada del calendario, las instrucciones recibidas, los justificantes de los movimientos y las incidencias. Contrasta después estos datos con nómina y cotización."]
+      ],
+      highlight: "Circuito mínimo para un cambio de última hora",
+      bullets: ["Producción comunica la nueva fecha, las personas afectadas y la hora prevista.", "Administración comprueba contrato, alta y datos que deben modificarse.", "Se tramita el movimiento que proceda y se guarda el justificante.", "Se confirma a producción qué fechas y personas han quedado registradas."],
+      sourceLabel: "Norma de afiliación y plazos",
+      note: "Contenido informativo actualizado el 9 de octubre de 2026. Los efectos de cada cambio dependen del contrato y de los hechos reales; requiere revisar cada caso.",
+      cta: "Que el calendario y las altas cuenten la misma historia.",
+      ctaP: "Coordinamos producción y administración para que cada cambio llegue a tiempo y quede documentado."
+    },
+    ca: {
+      title: "Altes, baixes i canvis de calendari en una producció — Artiva Laboral",
+      desc: "Com coordinar altes, baixes i canvis de dates en una producció cultural sense perdre el control dels terminis.",
+      tag: "GESTIÓ DE PRODUCCIÓ", date: "9 octubre 2026", read: "6 min de lectura",
+      h1: "Altes, baixes i canvis de calendari en una producció.",
+      lead: "Un assaig afegit, una actuació ajornada o un canvi d’equip poden alterar la contractació i les comunicacions a la Seguretat Social. El calendari ha d’arribar a administració abans que canviï la feina.",
+      key: "L’alta se sol·licita abans de començar a treballar. Segons el reglament vigent, la baixa i les variacions de dades es comuniquen dins dels sis dies naturals següents al cessament o al canvi.",
+      points: [
+        ["01", "Un calendari per persona i activitat", "Reuneix assajos, muntatges, funcions, rodatges, desplaçaments i desmuntatges amb dates reals. Identifica qui treballa cada dia i amb quin contracte."],
+        ["02", "Alta abans de la primera feina", "Comprova identitat, afiliació, codi de compte de cotització, funció i data d’inici. La sol·licitud d’alta s’ha de presentar abans que comenci la prestació de serveis."],
+        ["03", "Canvis comunicats tan bon punt es confirmen", "Si s’avança, s’ajorna o s’afegeix una jornada, producció ha d’avisar qui gestiona personal. Cal revisar el contracte, la jornada i si correspon corregir un moviment previ o comunicar una variació de dades."],
+        ["04", "Baixa amb la data de cessament correcta", "Confirma l’últim dia de feina i les tasques de tancament abans de comunicar la baixa. Una funció cancel·lada no justifica per si sola donar per acabada una relació laboral que continua."],
+        ["05", "Justificants i tancament", "Conserva la versió aprovada del calendari, les instruccions rebudes, els justificants dels moviments i les incidències. Contrasta després aquestes dades amb nòmina i cotització."]
+      ],
+      highlight: "Circuit mínim per a un canvi d’última hora",
+      bullets: ["Producció comunica la nova data, les persones afectades i l’hora prevista.", "Administració comprova el contracte, l’alta i les dades que cal modificar.", "Es tramita el moviment que correspongui i es desa el justificant.", "Es confirma a producció quines dates i persones han quedat registrades."],
+      sourceLabel: "Norma d’afiliació i terminis",
+      note: "Contingut informatiu actualitzat el 9 d’octubre de 2026. Els efectes de cada canvi depenen del contracte i dels fets reals; cal revisar cada cas.",
+      cta: "Que el calendari i les altes expliquin la mateixa història.",
+      ctaP: "Coordinem producció i administració perquè cada canvi arribi a temps i quedi documentat."
+    },
+    en: {
+      title: "Registrations, deregistrations and schedule changes in a production — Artiva Laboral",
+      desc: "How to coordinate Social Security registrations, deregistrations and date changes in a cultural production in Spain.",
+      tag: "PRODUCTION MANAGEMENT", date: "9 October 2026", read: "6 min read",
+      h1: "Registrations, deregistrations and schedule changes in a production.",
+      lead: "An added rehearsal, a postponed performance or a crew change can affect contracts and Social Security filings. The updated schedule must reach administration before the work changes.",
+      key: "Registration must be requested before work begins. Under the current regulation, deregistrations and changes to registered data must be reported within six calendar days of the end of work or the change.",
+      points: [
+        ["01", "A schedule for each person and activity", "List rehearsals, setups, performances, shoots, travel and breakdowns with actual dates. Identify who works each day and under which contract."],
+        ["02", "Register before the first work", "Check identity, Social Security number, contribution account, role and start date. Registration must be requested before the person starts providing services."],
+        ["03", "Report confirmed changes promptly", "If a workday moves or is added, production should alert the team managing staff. Review the contract, working time and whether a prior filing needs correction or registered data must change."],
+        ["04", "Use the correct end date", "Confirm the last day of work and any closing tasks before requesting deregistration. A cancelled performance alone does not end an employment relationship that continues."],
+        ["05", "Keep evidence and close the cycle", "Retain the approved schedule, instructions, filing receipts and incident record. Reconcile them with payroll and contributions afterwards."]
+      ],
+      highlight: "A minimum process for a last-minute change",
+      bullets: ["Production shares the new date, affected people and expected time.", "Administration checks contracts, registration and data to be changed.", "The appropriate filing is made and its receipt retained.", "Production receives confirmation of the dates and people recorded."],
+      sourceLabel: "Registration rules and deadlines",
+      note: "Information updated on 9 October 2026. The effect of each change depends on the contract and actual circumstances; each case needs review.",
+      cta: "Keep schedules and registrations aligned.",
+      ctaP: "We coordinate production and administration so changes are reported on time and properly recorded."
+    }
+  },
   regulation: {
     file: "recurso-nuevo-reglamento-artistas.html", accent: "article-hero-coral", source: "https://www.boe.es/buscar/act.php?id=BOE-A-2026-16173",
     es: { title: "Nuevo reglamento laboral de artistas: cambios para 2027 — Artiva Laboral", desc: "Principales cambios del Real Decreto 607/2026, aplicable desde el 25 de mayo de 2027.", tag: "ACTUALIDAD NORMATIVA", date: "9 septiembre 2026", read: "8 min de lectura", h1: "Nuevo reglamento laboral de artistas: qué cambia en 2027.", lead: "El Real Decreto 607/2026 crea un nuevo marco para la relación laboral especial de artistas y sustituirá la regulación de 1985.", key: "La nueva norma está publicada, pero entra en vigor el 25 de mayo de 2027. Hasta entonces continúa aplicándose el marco vigente.", points: [["01", "Un ámbito actualizado", "La regulación amplía y precisa las actividades artísticas y la inclusión del personal técnico y auxiliar directamente vinculado a la ejecución."], ["02", "Más detalle contractual", "Se refuerza la necesidad de documentar funciones, duración, causa temporal, retribución y condiciones esenciales."], ["03", "Una transición que debe prepararse", "Empresas y producciones deben revisar plantillas, modelos de contrato, procesos y coordinación antes de la fecha de entrada en vigor."], ["04", "Cada fecha exige su norma", "Los contratos y actuaciones anteriores y posteriores al cambio deben analizarse conforme al marco aplicable en cada momento."]], highlight: "Qué conviene revisar ahora", bullets: ["Perfiles artísticos, técnicos y auxiliares utilizados.", "Modelos de contrato y causas de temporalidad.", "Calendarios, retribución y sistemas de comunicación.", "Procedimientos de alta, baja y cierre de producción."], sourceLabel: "Fuente oficial", note: "Contenido informativo actualizado el 9 de septiembre de 2026. No sustituye el análisis de un caso concreto.", cta: "¿Qué cambia para tu producción?", ctaP: "Revisamos contigo los perfiles, contratos y procesos que pueden verse afectados." },
@@ -388,6 +458,7 @@ for (const lang of langs) {
     "recurso-nuevo-reglamento-artistas.html": article(lang, articles.regulation),
     "recurso-contrato-artistas.html": article(lang, articles.contract),
     "recurso-precontrato-trabajo.html": article(lang, articles.precontract),
+    "recurso-altas-bajas-calendario.html": article(lang, articles.schedule),
     "contacto.html": contact(lang),
     "privacidad.html": legalPage(lang, "privacy", "privacidad.html"),
     "cookies.html": legalPage(lang, "cookies", "cookies.html"),

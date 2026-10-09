@@ -32,6 +32,9 @@ if (menuButton && mobileMenu) {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeMenu();
   });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1120) closeMenu();
+  });
 }
 
 document.querySelectorAll("[data-real-contact-form]").forEach((form) => {
