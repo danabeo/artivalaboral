@@ -269,6 +269,8 @@
 .featured-resource-copy h2 { max-width: 760px; margin: 0 0 2rem; font-family: var(--font-serif); font-size: clamp(3.4rem, 5.8vw, 6.2rem); font-weight: 400; line-height: .88; letter-spacing: -.06em; }
 .featured-resource-copy > p { max-width: 42rem; margin: 0 0 2.2rem; line-height: 1.7; }
 .featured-resource-copy .button { align-self: flex-start; color: white; background: #080a0e; border-color: #080a0e; }
+.featured-resource-copy .button:hover { background: #252a33; border-color: #252a33; }
+.featured-resource-copy .button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
 .featured-resource-date { width: 210px; height: 210px; align-self: center; justify-self: end; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #080a0e; border-radius: 50%; transform: rotate(8deg); text-align: center; }
 .featured-resource-date small { font-size: .68rem; font-weight: 800; letter-spacing: .12em; }
 .featured-resource-date strong { font-size: 2.5rem; letter-spacing: -.06em; line-height: 1; }
@@ -281,6 +283,10 @@
 .resource-card > small { margin-top: .7rem; color: #707379; font-size: .78rem; }
 .resource-card h3 { margin: auto 0 1rem; font-family: var(--font-serif); font-size: clamp(2rem, 3vw, 3rem); font-weight: 500; line-height: .98; letter-spacing: -.045em; }
 .resource-card p { margin: 0; color: #65686d; line-height: 1.65; }
+.resource-card-button { display: inline-flex; min-height: 50px; align-items: center; justify-content: space-between; gap: 1.5rem; align-self: flex-start; margin-top: 1.7rem; padding: .8rem 1.1rem; color: #fff; background: #15171c; border: 2px solid #15171c; font-weight: 750; text-decoration: none; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.resource-card-button:hover { color: #fff; background: #303741; border-color: #303741; transform: translateY(-2px); }
+.resource-card-button:focus-visible { outline: 3px solid #da3f31; outline-offset: 4px; }
+.resource-card-button span { font-size: 1.15em; line-height: 1; }
 .resource-card i { margin-top: 1.5rem; color: #da3f31; font-size: .82rem; font-style: normal; font-weight: 780; }
 .resource-card-live { transition: color .2s ease, background .2s ease; }
 .resource-card-live:hover { color: white; background: #0d1015; }
