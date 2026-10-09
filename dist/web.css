@@ -445,7 +445,7 @@
 .language-switcher a { min-width: 2.35rem; padding: .35rem .42rem; color: #aeb1b5; border-radius: 999px; font-size: .68rem; font-weight: 800; letter-spacing: .04em; text-align: center; text-decoration: none; }
 .language-switcher a:hover, .language-switcher a:focus-visible { color: white; }
 .language-switcher a[aria-current="true"] { color: #080a0e; background: #70e5e5; }
-.menu-toggle, .mobile-menu { display: none; }
+.menu-toggle, .web-header .mobile-menu { display: none; }
 .menu-toggle { min-height: 44px; padding: .7rem .8rem; color: white; background: transparent; border: 1px solid rgba(255,255,255,.24); font: inherit; font-size: .74rem; font-weight: 750; cursor: pointer; }
 .menu-toggle i, .menu-toggle i::before { display: block; width: 18px; height: 1px; margin-left: .55rem; background: currentColor; content: ""; transition: transform .2s ease; }
 .menu-toggle i::before { margin: 5px 0 0; }
@@ -499,7 +499,7 @@
   .web-header { grid-template-columns: 1fr auto auto; min-height: 72px; }
   .desktop-nav, .web-header-cta { display: none; }
   .menu-toggle { display: inline-flex; align-items: center; }
-  .mobile-menu.is-open { display: block; }
+  .web-header .mobile-menu.is-open { display: block; }
 }
 
 @media (max-width: 700px) {
